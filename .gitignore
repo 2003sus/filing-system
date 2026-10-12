@@ -1,0 +1,25 @@
+# ===== 后端 =====
+backend/filing/target/
+backend/filing/.idea/
+backend/filing/*.iml
+backend/filing/.mvn/wrapper/maven-wrapper.jar
+
+# ===== 上传的运行时数据 =====
+backend/uploads/
+uploads/
+
+# ===== 前端 =====
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.log
+
+# ===== IDE =====
+.idea/
+*.iml
+.vscode/
+
+# ===== 系统 =====
+.DS_Store
+Thumbs.db
+*.log

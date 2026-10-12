@@ -1,0 +1,19 @@
+### 登录 reviewer01
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "reviewer01",
+  "password": "123456"
+}
+
+### reviewer01 确认提交
+POST http://localhost:8080/api/tasks/1/submit
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJyZXZpZXdlcjAxIiwicm9sZSI6IlJFVklFV0VSIiwiaWF0IjoxNzkxNjE1MTQxLCJleHAiOjE3OTE3MDE1NDF9.OsIO88BK0ZHQ1k4B_-XF--ArAhFxdvM3-r-bI0v5pnM
+### 期望：200，任务变SUBMITTED，生成申请编号
+
+### 用 staff01 提交（应该403）
+POST http://localhost:8080/api/tasks/1/submit
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwidXNlcm5hbWUiOiJyZXZpZXdlcjAxIiwicm9sZSI6IlJFVklFV0VSIiwiaWF0IjoxNzkxNjE1MTQxLCJleHAiOjE3OTE3MDE1NDF9.OsIO88BK0ZHQ1k4B_-XF--ArAhFxdvM3-r-bI0v5pnM
+
+### 期望：403

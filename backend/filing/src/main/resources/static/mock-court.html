@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>网上立案平台（模拟）</title>
+    <style>
+        body { font-family: Arial; max-width: 700px; margin: 40px auto; padding: 20px; }
+        h1 { color: #1a4d8f; border-bottom: 2px solid #1a4d8f; padding-bottom: 10px; }
+        .form-group { margin: 15px 0; }
+        label { display: inline-block; width: 100px; font-weight: bold; }
+        input, textarea { width: 400px; padding: 6px; }
+        button { background: #1a4d8f; color: white; padding: 10px 30px; border: none; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0d366b; }
+        #result { margin-top: 20px; padding: 15px; background: #e6f4ea; border-left: 4px solid green; display: none; }
+        #applyNo { font-size: 20px; color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h1>网上立案平台（模拟）</h1>
+<p style="color: #888;">此页面仅用于练习，不是真实法院网站</p>
+
+<form id="filingForm">
+    <div class="form-group">
+        <label>原告：</label>
+        <input type="text" id="plaintiff" name="plaintiff" required>
+    </div>
+    <div class="form-group">
+        <label>被告：</label>
+        <input type="text" id="defendant" name="defendant" required>
+    </div>
+    <div class="form-group">
+        <label>案由：</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div class="form-group">
+        <label>金额：</label>
+        <input type="number" id="amount" name="amount">
+    </div>
+    <div class="form-group">
+        <label>描述：</label>
+        <textarea id="description" name="description" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label>材料：</label>
+        <input type="file" id="material" name="material">
+    </div>
+    <button type="submit" id="submitBtn">提交立案申请</button>
+</form>
+
+<div id="result">
+    <p>✅ 提交成功！</p>
+    <p>申请编号：<span id="applyNo"></span></p>
+</div>
+
+<script>
+    document.getElementById('filingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 生成假申请编号
+        const now = new Date();
+        const ymd = now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
+        const rand = String(Math.floor(Math.random() * 9000) + 1000);
+        const applyNo = 'MOCK-' + ymd + '-' + rand;
+
+        document.getElementById('applyNo').textContent = applyNo;
+        document.getElementById('result').style.display = 'block';
+
+        // 把编号存到 data 属性，方便 Playwright 读取
+        document.body.setAttribute('data-apply-no', applyNo);
+    });
+</script>
+
+</body>
+</html>
